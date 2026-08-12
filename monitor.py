@@ -1,4 +1,4 @@
-import base64, csv, io, smtplib, re, os
+import base64, csv, io, smtplib, re, os, hashlib
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -13,6 +13,7 @@ CSV_FILE = 'imoveis_historico.csv'
 GMAIL_USER = 'jhonathan.sousa1@gmail.com'
 GMAIL_PASSWORD = os.environ['GMAIL_PASSWORD']
 NOTIFY_EMAIL = 'jhonathan.sousa1@gmail.com'
+CC_EMAIL = 'mestter21@gmail.com'
 CSV_COLS = ['id','bloco','aluguel','valor_m2','area','quartos','suites','vagas','link','data_descoberta']
 now_str = datetime.now().strftime('%Y-%m-%d %H:%M')
 
@@ -36,11 +37,10 @@ def scrape():
 
     imoveis = []
     for card in cards:
-        parent_a = card.find_parent('a', href=True)
-        href = parent_a['href'] if parent_a else ''
-        link = 'https://www.dfimoveis.com.br' + href if href else ''
-        id_match = re.search(r'-(\d+)$', href)
-        imovel_id = id_match.group(1) if id_match else href
+        # Busca ancora: tenta pai primeiro, depois filho
+        anchor = card.find_parent('a', href=True) or card.find('a', href=True)
+        href = anchor.get('href', '') if anchor else ''
+        link = 'https://www.dfimoveis.com.br' + href if href and href.startswith('/') else href
 
         raw = [t.strip() for t in card.get_text('\n').split('\n') if t.strip()]
 
@@ -56,11 +56,8 @@ def scrape():
                 i += 1
 
         bloco = card.find('h2').get_text(strip=True) if card.find('h2') else ''
-
-        # Aluguel: primeiro "R$ X" que nao contenha "Valor"
         aluguel = next((t for t in texts if t.startswith('R$') and 'Valor' not in t), '')
 
-        # Valor m2: busca o texto com "Valor m" e agrega o preco seguinte se estiver separado
         valor_m2 = ''
         for j, t in enumerate(texts):
             if 'Valor m' in t:
@@ -72,7 +69,6 @@ def scrape():
                     valor_m2 = t
                 break
 
-        # Area: extrai apenas "NNN m2" do texto que contem m2
         area = ''
         for t in texts:
             if 'm²' in t and 'Valor' not in t:
@@ -83,6 +79,13 @@ def scrape():
         quartos = next((t for t in texts if 'Quarto' in t), '')
         suites = next((t for t in texts if 'Suíte' in t or 'Suite' in t), '')
         vagas = next((t for t in texts if 'Vaga' in t), '')
+
+        # ID extraido do link; fallback: hash dos campos principais
+        id_match = re.search(r'-(\d+)(?:[/?]|$)', href)
+        if id_match:
+            imovel_id = id_match.group(1)
+        else:
+            imovel_id = hashlib.md5(f'{bloco}|{area}|{quartos}|{aluguel}'.encode()).hexdigest()[:12]
 
         imoveis.append({
             'id': imovel_id, 'bloco': bloco, 'aluguel': aluguel, 'valor_m2': valor_m2,
@@ -176,13 +179,14 @@ def enviar_email(novos):
     msg['Subject'] = subject
     msg['From'] = GMAIL_USER
     msg['To'] = NOTIFY_EMAIL
+    msg['Cc'] = CC_EMAIL
     msg.attach(MIMEText(html, 'html', 'utf-8'))
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
         server.ehlo()
         server.starttls()
         server.login(GMAIL_USER, GMAIL_PASSWORD)
         server.send_message(msg)
-    print(f'[OK] Email enviado para {NOTIFY_EMAIL}.')
+    print(f'[OK] Email enviado para {NOTIFY_EMAIL} e copia para {CC_EMAIL}.')
 
 try:
     imoveis_atuais = scrape()
