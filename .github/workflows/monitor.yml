@@ -1,0 +1,25 @@
+name: Monitor SQS-308
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # toda hora
+  workflow_dispatch:      # disparo manual para teste
+
+jobs:
+  monitorar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write     # permite atualizar imoveis_historico.csv
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar dependencias
+        run: pip install requests beautifulsoup4 -q
+
+      - name: Executar monitor
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+        run: python monitor.py
