@@ -24,7 +24,6 @@ def scrape():
         )
         try:
             page.goto(URL_ALVO, timeout=30000, wait_until='domcontentloaded')
-            # aguarda os cards carregarem via JS
             page.wait_for_selector('.imovel-card', timeout=20000)
         except Exception as e:
             print(f'[AVISO] wait_for_selector: {e}')
@@ -42,14 +41,49 @@ def scrape():
         link = 'https://www.dfimoveis.com.br' + href if href else ''
         id_match = re.search(r'-(\d+)$', href)
         imovel_id = id_match.group(1) if id_match else href
-        texts = [t.strip() for t in card.get_text('\n').split('\n') if t.strip()]
+
+        raw = [t.strip() for t in card.get_text('\n').split('\n') if t.strip()]
+
+        # Mescla tokens separados: ["R$", "3.500"] -> ["R$ 3.500"]
+        texts = []
+        i = 0
+        while i < len(raw):
+            if raw[i] == 'R$' and i + 1 < len(raw) and re.match(r'^[\d.,]+$', raw[i + 1]):
+                texts.append(f'R$ {raw[i + 1]}')
+                i += 2
+            else:
+                texts.append(raw[i])
+                i += 1
+
         bloco = card.find('h2').get_text(strip=True) if card.find('h2') else ''
+
+        # Aluguel: primeiro "R$ X" que nao contenha "Valor"
         aluguel = next((t for t in texts if t.startswith('R$') and 'Valor' not in t), '')
-        valor_m2 = next((t for t in texts if 'Valor m' in t), '')
-        area = next((t for t in texts if 'm²' in t and 'Valor' not in t), '')
+
+        # Valor m2: busca o texto com "Valor m" e agrega o preco seguinte se estiver separado
+        valor_m2 = ''
+        for j, t in enumerate(texts):
+            if 'Valor m' in t:
+                if re.search(r'R\$', t):
+                    valor_m2 = t
+                elif j + 1 < len(texts) and texts[j + 1].startswith('R$'):
+                    valor_m2 = f'{t} {texts[j + 1]}'
+                else:
+                    valor_m2 = t
+                break
+
+        # Area: extrai apenas "NNN m2" do texto que contem m2
+        area = ''
+        for t in texts:
+            if 'm²' in t and 'Valor' not in t:
+                m = re.search(r'(\d+)\s*m²', t)
+                area = f'{m.group(1)} m²' if m else t
+                break
+
         quartos = next((t for t in texts if 'Quarto' in t), '')
         suites = next((t for t in texts if 'Suíte' in t or 'Suite' in t), '')
         vagas = next((t for t in texts if 'Vaga' in t), '')
+
         imoveis.append({
             'id': imovel_id, 'bloco': bloco, 'aluguel': aluguel, 'valor_m2': valor_m2,
             'area': area, 'quartos': quartos, 'suites': suites, 'vagas': vagas,
