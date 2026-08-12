@@ -18,7 +18,7 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 697515,SQN 205 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-norte-brasilia-df-sqn-205-bloco-j-697515,seed:links.txt
 877183,SQS 202,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-202-877183,seed:links.txt
 901384,SQS 109 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-109-bloco-b-901384,seed:links.txt
-629792,Sqnw 110,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-noroeste-brasilia-df-sqnw-110-629792,seed:links.txt
+629792,SQNW 110,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-noroeste-brasilia-df-sqnw-110-629792,seed:links.txt
 783982,SQS 109 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-109-bloco-e-783982,seed:links.txt
 586857,SQS 109,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-109-586857,seed:links.txt
 675112,SQN 112 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-norte-brasilia-df-sqn-112-bloco-a-675112,seed:links.txt
@@ -39,7 +39,7 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 936582,SQN 315,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-norte-brasilia-df-sqn-315-936582,seed:links.txt
 931279,SQS 210 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-venda-asa-sul-brasilia-df-sqs-210-bloco-e-931279,seed:links.txt
 945084,SQS 109,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-109-945084,seed:links.txt
-945295,Sqnw 109,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-noroeste-brasilia-df-sqnw-109-945295,seed:links.txt
+945295,SQNW 109,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-noroeste-brasilia-df-sqnw-109-945295,seed:links.txt
 950699,SQS 109 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-109-bloco-e-950699,seed:links.txt
 948049,SQN 106 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-norte-brasilia-df-sqn-106-bloco-g-948049,seed:links.txt
 956345,SQS 115 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-115-bloco-b-956345,seed:links.txt
@@ -58,8 +58,8 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 704454,SQS 303,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-303-704454,seed:links.txt
 972106,SQS 307,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-307-972106,seed:links.txt
 1003067,SQN 402 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-norte-brasilia-df-sqn-402-bloco-i-1003067,seed:links.txt
-1006275,Sqsw 500,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-venda-sudoeste-brasilia-df-sqsw-500-1006275,seed:links.txt
-1010941,Sqsw 500,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-venda-sudoeste-brasilia-df-sqsw-500-1010941,seed:links.txt
+1006275,SQSW 500,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-venda-sudoeste-brasilia-df-sqsw-500-1006275,seed:links.txt
+1010941,SQSW 500,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-venda-sudoeste-brasilia-df-sqsw-500-1010941,seed:links.txt
 976687,SQS 109 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-venda-asa-sul-brasilia-df-sqs-109-bloco-c-976687,seed:links.txt
 1012433,SQS 303,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-303-1012433,seed:links.txt
 1009661,SQS 109,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-venda-asa-sul-brasilia-df-sqs-109-1009661,seed:links.txt
@@ -103,7 +103,7 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 945089,SQN 107,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-107-945089,seed:links.txt
 1029822,SQN 210 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-210-bloco-i-1029822,seed:links.txt
 187814,SQN 314 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-314-bloco-f-187814,seed:links.txt
-1027434,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 712,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-712-1027434,seed:links.txt
+1027434,SHCGN 712,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-712-1027434,seed:links.txt
 964759,SQN 209 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-209-bloco-k-964759,seed:links.txt
 269359,SQN 111 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-111-bloco-k-269359,seed:links.txt
 192345,SQN 316 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-316-bloco-f-192345,seed:links.txt
@@ -115,18 +115,18 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 951014,SQN 116,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-116-951014,seed:links.txt
 1018149,SQN 315 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-315-bloco-b-1018149,seed:links.txt
 1017154,SQN 108 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-108-bloco-h-1017154,seed:links.txt
-135898,Sqsw 303,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-303-135898,seed:links.txt
-301083,Sqsw 102 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-102-bloco-d-301083,seed:links.txt
-240069,Sqsw 102 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-102-bloco-d-240069,seed:links.txt
-255906,Sqsw 305 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-305-bloco-a-255906,seed:links.txt
-452137,Sqsw 504,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-504-452137,seed:links.txt
-997283,Apartamento 4 Quartos Aluguel Sudoeste Brasilia Df Ccsw 1,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-ccsw-1-997283,seed:links.txt
-1016153,Sqsw 103 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-103-bloco-i-1016153,seed:links.txt
+135898,SQSW 303,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-303-135898,seed:links.txt
+301083,SQSW 102 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-102-bloco-d-301083,seed:links.txt
+240069,SQSW 102 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-102-bloco-d-240069,seed:links.txt
+255906,SQSW 305 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-305-bloco-a-255906,seed:links.txt
+452137,SQSW 504,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-504-452137,seed:links.txt
+997283,CCSW 1,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-ccsw-1-997283,seed:links.txt
+1016153,SQSW 103 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-103-bloco-i-1016153,seed:links.txt
 618722,SQS 104 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-104-bloco-d-618722,seed:links.txt
 714719,SQN 316 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-316-bloco-f-714719,seed:links.txt
-818307,Sqsw 104 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-104-bloco-e-818307,seed:links.txt
+818307,SQSW 104 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-104-bloco-e-818307,seed:links.txt
 1030705,SQN 215 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-215-bloco-e-1030705,seed:links.txt
-1031318,Sqsw 304 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-304-bloco-e-1031318,seed:links.txt
+1031318,SQSW 304 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-304-bloco-e-1031318,seed:links.txt
 972769,SQS 216 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-216-bloco-f-972769,seed:links.txt
 516187,SQS 105,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-105-516187,seed:links.txt
 977948,SQS 308 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-308-bloco-c-977948,seed:links.txt
@@ -142,7 +142,7 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 1034689,SQN 206 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-206-bloco-i-1034689,seed:links.txt
 1029358,SHIGS 707,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-sul-brasilia-df-shigs-707-1029358,seed:links.txt
 677007,SQS 213 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-213-bloco-j-677007,seed:links.txt
-1018437,Casa 3 Quartos Aluguel Asa Norte Brasilia Df Shcgn 715,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-715-1018437,seed:links.txt
+1018437,SHCGN 715,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-715-1018437,seed:links.txt
 1028906,SQN 307 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-307-bloco-d-1028906,seed:links.txt
 1035818,SQN 205 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-205-bloco-b-1035818,seed:links.txt
 1025857,SQN 203 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-203-bloco-k-1025857,seed:links.txt
@@ -154,16 +154,16 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 1038530,SQS 308 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-308-bloco-b-1038530,seed:links.txt
 1038559,SQS 204 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-204-bloco-j-1038559,seed:links.txt
 1002790,SQN 111 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-111-bloco-i-1002790,seed:links.txt
-66026,Sqsw 504 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-504-bloco-g-66026,seed:links.txt
+66026,SQSW 504 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-504-bloco-g-66026,seed:links.txt
 987785,SHIGS 710,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-sul-brasilia-df-shigs-710-987785,seed:links.txt
 204843,SQS 307 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-307-bloco-f-204843,seed:links.txt
 224843,SQS 314 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-314-bloco-f-224843,seed:links.txt
 1039622,SQS 204 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-204-bloco-e-1039622,seed:links.txt
-1034228,Sqsw 304 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-304-bloco-e-1034228,seed:links.txt
-1042891,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 707 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-707-bloco-k-1042891,seed:links.txt
+1034228,SQSW 304 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-304-bloco-e-1034228,seed:links.txt
+1042891,SHCGN 707 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-707-bloco-k-1042891,seed:links.txt
 1042936,SQN 310 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-310-bloco-i-1042936,seed:links.txt
 1043590,SQS 316 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-316-bloco-i-1043590,seed:links.txt
-518099,Casa 3 Quartos Aluguel Asa Norte Brasilia Df Shcgn 703 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-703-bloco-f-518099,seed:links.txt
+518099,SHCGN 703 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-703-bloco-f-518099,seed:links.txt
 1043709,SQN 215 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-215-bloco-c-1043709,seed:links.txt
 1043706,SQN 310 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-310-bloco-i-1043706,seed:links.txt
 1044134,SQS 210 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-210-bloco-a-1044134,seed:links.txt
@@ -171,16 +171,16 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 1044158,SQN 115 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-115-bloco-e-1044158,seed:links.txt
 1044552,SQN 316 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-316-bloco-f-1044552,seed:links.txt
 1044637,SQS 206,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-206-1044637,seed:links.txt
-1044786,Casa 3 Quartos Aluguel Asa Norte Brasilia Df Shcgn 711 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-711-bloco-j-1044786,seed:links.txt
+1044786,SHCGN 711 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-711-bloco-j-1044786,seed:links.txt
 1046764,SQN 314,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-314-1046764,seed:links.txt
 1047313,SQN 310 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-310-bloco-d-1047313,seed:links.txt
-1042314,Casa 3 Quartos Aluguel Asa Norte Brasilia Df Shcgn 703 Bloco M,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-703-bloco-m-1042314,seed:links.txt
+1042314,SHCGN 703 Bloco M,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-703-bloco-m-1042314,seed:links.txt
 698748,SQN 209 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-209-bloco-j-698748,seed:links.txt
 76524,SQN 309 Bloco P,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-309-bloco-p-76524,seed:links.txt
-892547,Sqsw 102,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-102-892547,seed:links.txt
+892547,SQSW 102,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-sudoeste-brasilia-df-sqsw-102-892547,seed:links.txt
 383969,SQN 315 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-315-bloco-f-383969,seed:links.txt
 1050872,SQN 203 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-203-bloco-k-1050872,seed:links.txt
-1052242,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 712 Bloco Q,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-712-bloco-q-1052242,seed:links.txt
+1052242,SHCGN 712 Bloco Q,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-712-bloco-q-1052242,seed:links.txt
 1053626,SQS 314 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-314-bloco-g-1053626,seed:links.txt
 1053555,SQN 104,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-104-1053555,seed:links.txt
 495840,SHIGS 703 Bloco M,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-sul-brasilia-df-shigs-703-bloco-m-495840,seed:links.txt
@@ -190,11 +190,11 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 1056350,SQN 310 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-310-bloco-i-1056350,seed:links.txt
 1056466,SQS 211 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-211-bloco-a-1056466,seed:links.txt
 1042952,SQS 215,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-215-1042952,seed:links.txt
-1042857,Casa 3 Quartos Aluguel Asa Norte Brasilia Df Shcgn 716,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-716-1042857,seed:links.txt
+1042857,SHCGN 716,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-norte-brasilia-df-shcgn-716-1042857,seed:links.txt
 1059970,SQN 105 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-105-bloco-a-1059970,seed:links.txt
 1059463,SQN 310 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-310-bloco-b-1059463,seed:links.txt
 687953,SQS 114 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-114-bloco-h-687953,seed:links.txt
-1008752,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 714,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-714-1008752,seed:links.txt
+1008752,SHCGN 714,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-714-1008752,seed:links.txt
 1060303,SQN 308 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-308-bloco-c-1060303,seed:links.txt
 858069,SQS 213 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-213-bloco-k-858069,seed:links.txt
 1061383,SQN 316,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-316-1061383,seed:links.txt
@@ -224,7 +224,7 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 1073156,SQS 115 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-115-bloco-j-1073156,seed:links.txt
 1073158,SQN 115,,,,,,,https://www.dfimoveis.com.br/imovel/kitnet-4-quartos-aluguel-asa-norte-brasilia-df-sqn-115-1073158,seed:links.txt
 1073159,SQN 115 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-115-bloco-f-1073159,seed:links.txt
-1074772,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 712 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-712-bloco-k-1074772,seed:links.txt
+1074772,SHCGN 712 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-712-bloco-k-1074772,seed:links.txt
 1075123,SQS 207,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-207-1075123,seed:links.txt
 1075196,SQN 310 Bloco M,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-310-bloco-m-1075196,seed:links.txt
 1076226,SQN 203 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-203-bloco-b-1076226,seed:links.txt
@@ -262,7 +262,7 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 342186,SQN 315 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-315-bloco-k-342186,seed:links.txt
 1091665,SQN 308,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-308-1091665,seed:links.txt
 1092018,SQN 106,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-106-1092018,seed:links.txt
-1092056,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 715 Bloco N,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-715-bloco-n-1092056,seed:links.txt
+1092056,SHCGN 715 Bloco N,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-715-bloco-n-1092056,seed:links.txt
 1092348,SQS 104 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-104-bloco-k-1092348,seed:links.txt
 1092393,SQS 308,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-308-1092393,seed:links.txt
 1092564,SQS 104 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-104-bloco-d-1092564,seed:links.txt
@@ -293,7 +293,7 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 463286,SQS 114 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-114-bloco-f-463286,seed:links.txt
 1102968,SQS 114 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-114-bloco-h-1102968,seed:links.txt
 1103337,SHIGS 715 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-sul-brasilia-df-shigs-715-bloco-d-1103337,seed:links.txt
-1103221,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 709 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-709-bloco-c-1103221,seed:links.txt
+1103221,SHCGN 709 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-709-bloco-c-1103221,seed:links.txt
 1103728,SHIGS 703 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-sul-brasilia-df-shigs-703-bloco-f-1103728,seed:links.txt
 742292,SQS 309 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-309-bloco-h-742292,seed:links.txt
 657014,SHIGS 704 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-sul-brasilia-df-shigs-704-bloco-h-657014,seed:links.txt
@@ -323,14 +323,14 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 1117852,SQS 210 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-210-bloco-a-1117852,seed:links.txt
 1117945,SQN 210 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-210-bloco-i-1117945,seed:links.txt
 1119297,SQS 315 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-315-bloco-i-1119297,seed:links.txt
-1119349,Apartamento 3 Quartos Aluguel Asa Sul Brasilia Df Eqs 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1119349,seed:links.txt
+1119349,EQS 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1119349,seed:links.txt
 1119924,SQN 308 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-308-bloco-a-1119924,seed:links.txt
 778361,SQS 311 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-311-bloco-k-778361,seed:links.txt
 909418,SQN 212 Bloco E,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-212-bloco-e-909418,seed:links.txt
 1121000,SQN 115 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-115-bloco-f-1121000,seed:links.txt
 1122058,SHIGS 705 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-sul-brasilia-df-shigs-705-bloco-g-1122058,seed:links.txt
 463266,SQN 307 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-307-bloco-a-463266,seed:links.txt
-1123953,Apartamento 3 Quartos Aluguel Asa Sul Brasilia Df Eqs 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1123953,seed:links.txt
+1123953,EQS 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1123953,seed:links.txt
 1124809,SQN 202 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-202-bloco-a-1124809,seed:links.txt
 1124926,SQS 206 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-206-bloco-h-1124926,seed:links.txt
 839904,SQN 311 Bloco L,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-311-bloco-l-839904,seed:links.txt
@@ -350,27 +350,27 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 1133398,SQN 314,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-314-1133398,seed:links.txt
 316221,SQS 211 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-211-bloco-d-316221,seed:links.txt
 1114639,SQS 210 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-210-bloco-a-1114639,seed:links.txt
-327731,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 709 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-709-bloco-j-327731,seed:links.txt
-1137177,Casa 3 Quartos Aluguel Asa Sul Brasilia Df Eqs 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1137177,seed:links.txt
+327731,SHCGN 709 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-709-bloco-j-327731,seed:links.txt
+1137177,EQS 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1137177,seed:links.txt
 281507,SQN 108 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-108-bloco-k-281507,seed:links.txt
 268101,SQN 310 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-310-bloco-i-268101,seed:links.txt
 1137659,SQN 202 Bloco D,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-202-bloco-d-1137659,seed:links.txt
 1127159,SQS 211 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-211-bloco-f-1127159,seed:links.txt
 1138094,SQS 208 Bloco J,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-208-bloco-j-1138094,seed:links.txt
 1138215,SQN 208,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-208-1138215,seed:links.txt
-1138213,Apartamento 4 Quartos Aluguel Asa Norte Brasilia Df Shtn Trecho 1,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-shtn-trecho-1-1138213,seed:links.txt
+1138213,SHTN Trecho 1,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-shtn-trecho-1-1138213,seed:links.txt
 1093718,SQS 308 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-308-bloco-c-1093718,seed:links.txt
 1139169,SHIGS 710,,,,,,,https://www.dfimoveis.com.br/imovel/casa-3-quartos-aluguel-asa-sul-brasilia-df-shigs-710-1139169,seed:links.txt
 1138848,SQN 202 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-202-bloco-c-1138848,seed:links.txt
 1138900,SQN 215 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-215-bloco-c-1138900,seed:links.txt
-1139564,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 703 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-703-bloco-b-1139564,seed:links.txt
+1139564,SHCGN 703 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-703-bloco-b-1139564,seed:links.txt
 1139996,SQS 208 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-208-bloco-c-1139996,seed:links.txt
 1140008,SQN 316 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-316-bloco-f-1140008,seed:links.txt
 1140713,SQS 204 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-204-bloco-b-1140713,seed:links.txt
 1140723,SQN 202 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-202-bloco-f-1140723,seed:links.txt
 1141193,SQN 203 Bloco F,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-203-bloco-f-1141193,seed:links.txt
 1142292,SQN 111 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-111-bloco-i-1142292,seed:links.txt
-1143487,Casa Condominio 3 Quartos Aluguel Asa Sul Brasilia Df Eqs 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/casa-condominio-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1143487,seed:links.txt
+1143487,EQS 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/casa-condominio-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1143487,seed:links.txt
 1144773,SQN 108,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-108-1144773,seed:links.txt
 759023,SQS 314 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-314-bloco-g-759023,seed:links.txt
 1147720,SQS 112 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-112-bloco-g-1147720,seed:links.txt
@@ -380,10 +380,10 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 699919,SHIGS 704 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-sul-brasilia-df-shigs-704-bloco-a-699919,seed:links.txt
 873202,SQS 303 Bloco A,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-303-bloco-a-873202,seed:links.txt
 1150516,SQN 205 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-205-bloco-i-1150516,seed:links.txt
-901656,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 711 Bloco P,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-711-bloco-p-901656,seed:links.txt
+901656,SHCGN 711 Bloco P,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-711-bloco-p-901656,seed:links.txt
 1128423,SQS 309,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-309-1128423,seed:links.txt
 1153590,SQS 211 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-211-bloco-b-1153590,seed:links.txt
-1139046,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 714 Bloco V,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-714-bloco-v-1139046,seed:links.txt
+1139046,SHCGN 714 Bloco V,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-714-bloco-v-1139046,seed:links.txt
 1153259,SQN 211,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-211-1153259,seed:links.txt
 1153164,SQN 203 Bloco K,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-203-bloco-k-1153164,seed:links.txt
 1151769,SQN 304 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-304-bloco-g-1151769,seed:links.txt
@@ -422,11 +422,11 @@ id,bloco,aluguel,valor_m2,area,quartos,suites,vagas,link,data_descoberta
 1183902,SQS 310 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-310-bloco-b-1183902,seed:links.txt
 1166489,SQS 213 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-sul-brasilia-df-sqs-213-bloco-h-1166489,seed:links.txt
 1184579,SQN 215 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-215-bloco-h-1184579,seed:links.txt
-1186037,Casa Condominio 3 Quartos Aluguel Asa Sul Brasilia Df Eqs 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/casa-condominio-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1186037,seed:links.txt
+1186037,EQS 414 415,,,,,,,https://www.dfimoveis.com.br/imovel/casa-condominio-3-quartos-aluguel-asa-sul-brasilia-df-eqs-414-415-1186037,seed:links.txt
 1187516,SQS 204,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-204-1187516,seed:links.txt
 1188301,SQN 310 Bloco I,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-310-bloco-i-1188301,seed:links.txt
 1188798,SQN 202 Bloco C,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-4-quartos-aluguel-asa-norte-brasilia-df-sqn-202-bloco-c-1188798,seed:links.txt
-1189060,Casa 4 Quartos Aluguel Asa Norte Brasilia Df Shcgn 714 Bloco V,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-714-bloco-v-1189060,seed:links.txt
+1189060,SHCGN 714 Bloco V,,,,,,,https://www.dfimoveis.com.br/imovel/casa-4-quartos-aluguel-asa-norte-brasilia-df-shcgn-714-bloco-v-1189060,seed:links.txt
 1189846,SQN 110 Bloco G,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-110-bloco-g-1189846,seed:links.txt
 1189963,SQN 307 Bloco H,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-norte-brasilia-df-sqn-307-bloco-h-1189963,seed:links.txt
 1190934,SQS 109 Bloco B,,,,,,,https://www.dfimoveis.com.br/imovel/apartamento-3-quartos-aluguel-asa-sul-brasilia-df-sqs-109-bloco-b-1190934,seed:links.txt

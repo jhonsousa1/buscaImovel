@@ -30,6 +30,11 @@ jobs:
       - name: Instalar dependencias
         run: pip install --quiet requests beautifulsoup4
 
+      # Nao acessam a rede. Pegam regressao no parser antes de uma execucao
+      # real gravar dados errados no historico.
+      - name: Rodar testes
+        run: python -m unittest discover -p 'test_*.py' -v
+
       - name: Executar monitor
         env:
           GMAIL_USER: ${{ vars.GMAIL_USER }}
@@ -47,4 +52,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add imoveis_historico.csv
           git commit -m "Monitor: novos imoveis em $(date '+%Y-%m-%d %H:%M')"
-          git push
+          # Sobrevive a um push que tenha acontecido depois do checkout.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

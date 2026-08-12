@@ -12,6 +12,7 @@ um e-mail com os detalhes e grava o novo registro no CSV.
 | Arquivo | Função |
 | --- | --- |
 | `monitor.py` | Coleta, comparação com o histórico e envio do e-mail |
+| `test_monitor.py` | Testes do parser (sem rede), executados na CI |
 | `.github/workflows/monitor-imoveis.yml` | Agendamento (a cada hora) e commit do histórico |
 | `imoveis_historico.csv` | Histórico de imóveis já vistos (chave: `id` do anúncio) |
 | `links.txt` | Coleta anterior, usada para semear o histórico |
@@ -37,8 +38,9 @@ Só é preciso configurar o envio de e-mail, em
 | `GMAIL_USER` | Conta Gmail remetente |
 | `NOTIFY_EMAIL` | Destinatário do alerta (se vazio, usa `GMAIL_USER`) |
 
-Sem o secret o monitor ainda roda e atualiza o CSV, mas registra
-`[AVISO] GMAIL_APP_PASSWORD ausente` em vez de enviar o e-mail.
+Sem essa configuração o monitor **aborta antes de gravar o histórico**. Isso é
+deliberado: gravar sem conseguir enviar o e-mail marcaria os imóveis como já
+vistos e o alerta seria perdido para sempre.
 
 ## Execução manual
 
@@ -46,8 +48,24 @@ Em `Actions → Monitor Imoveis SQS 308 → Run workflow`. Também dá para roda
 
 ```bash
 pip install requests beautifulsoup4
-GMAIL_USER=... GMAIL_APP_PASSWORD=... python monitor.py
+
+# Só mostra o que encontrou: não grava o CSV nem envia e-mail.
+DRY_RUN=1 python monitor.py
+
+# Execução real.
+GMAIL_USER=... GMAIL_APP_PASSWORD=... NOTIFY_EMAIL=... python monitor.py
 ```
+
+## Testes
+
+```bash
+python -m unittest discover -p 'test_*.py' -v
+```
+
+Não acessam a rede — o parser é exercitado sobre HTML de fixture, e há uma
+regressão que confere a extração de ID e de endereço contra as 456 URLs reais
+de `links.txt`. A CI roda a suíte antes de cada coleta, para que uma quebra no
+parser não grave dados errados no histórico.
 
 ## Alterando a busca
 
