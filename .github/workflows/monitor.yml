@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '0 * * * *'  # toda hora
   workflow_dispatch:      # disparo manual para teste
+  push:
+    branches: ['fix/**']  # valida correcoes em modo seguro (DRY_RUN)
 
 jobs:
   monitorar:
