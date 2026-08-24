@@ -117,13 +117,16 @@ def scrape():
         bloco = card.find('h2').get_text(strip=True) if card.find('h2') else ''
         aluguel = next((t for t in texts if t.startswith('R$') and 'Valor' not in t), '')
 
+        # O site quebra o valor por m2 em dois tokens: 'Valor m² R$' e '50'.
+        # O 'R$' vem colado no rotulo, entao a mesclagem acima nao pega o numero.
         valor_m2 = ''
         for j, t in enumerate(texts):
             if 'Valor m' in t:
-                if re.search(r'R\$', t):
+                prox = texts[j + 1] if j + 1 < len(texts) else ''
+                if re.search(r'R\$\s*[\d.,]+', t):
                     valor_m2 = t
-                elif j + 1 < len(texts) and texts[j + 1].startswith('R$'):
-                    valor_m2 = f'{t} {texts[j + 1]}'
+                elif re.match(r'^[\d.,]+$', prox) or prox.startswith('R$'):
+                    valor_m2 = f'{t} {prox}'
                 else:
                     valor_m2 = t
                 break
