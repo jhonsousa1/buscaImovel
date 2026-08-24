@@ -152,6 +152,9 @@ def scrape():
             'area': area, 'quartos': quartos, 'suites': suites, 'vagas': vagas,
             'link': link, 'data_descoberta': now_str, 'id_legado': id_legado
         })
+
+        if DEBUG_CARDS and indice < 2:
+            print(f'[DIAG] registro montado={imoveis[-1]}')
     return imoveis
 
 def ler_historico():
