@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '0 * * * *'  # toda hora
   workflow_dispatch:      # disparo manual para teste
+  push:
+    branches: ['fix/**']  # valida correcoes em modo seguro (DRY_RUN)
 
 jobs:
   monitorar:
@@ -25,4 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+          # Fora da main: nao envia email, nao grava CSV e imprime o diagnostico.
+          DRY_RUN: ${{ github.ref_name != 'main' && '1' || '' }}
+          DEBUG_CARDS: ${{ github.ref_name != 'main' && '1' || '' }}
         run: python monitor.py
