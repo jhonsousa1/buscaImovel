@@ -25,4 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+          # Fora da main: nao envia email, nao grava CSV e imprime o diagnostico.
+          DRY_RUN: ${{ github.ref_name != 'main' && '1' || '' }}
+          DEBUG_CARDS: ${{ github.ref_name != 'main' && '1' || '' }}
         run: python monitor.py

@@ -1,5 +1,6 @@
 import base64, csv, io, smtplib, re, os, hashlib
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from bs4 import BeautifulSoup
@@ -15,7 +16,60 @@ GMAIL_PASSWORD = os.environ['GMAIL_PASSWORD']
 NOTIFY_EMAIL = 'jhonathan.sousa1@gmail.com'
 CC_EMAIL = 'mestter21@gmail.com'
 CSV_COLS = ['id','bloco','aluguel','valor_m2','area','quartos','suites','vagas','link','data_descoberta']
-now_str = datetime.now().strftime('%Y-%m-%d %H:%M')
+now_str = datetime.now(ZoneInfo('America/Sao_Paulo')).strftime('%Y-%m-%d %H:%M')
+
+# Execucoes fora da main rodam sem efeito colateral: nao envia email nem grava CSV.
+DRY_RUN = os.environ.get('DRY_RUN', '') not in ('', '0', 'false')
+DEBUG_CARDS = os.environ.get('DEBUG_CARDS', '') not in ('', '0', 'false')
+BASE_URL = 'https://www.dfimoveis.com.br'
+
+
+def _urlize(href):
+    """Normaliza um href relativo ou absoluto para URL completa."""
+    href = (href or '').strip()
+    if not href:
+        return ''
+    if href.startswith('http'):
+        return href
+    return BASE_URL + ('' if href.startswith('/') else '/') + href
+
+
+def extrair_href(card):
+    """Procura o link do anuncio em varias posicoes possiveis do DOM.
+
+    O layout ja mudou uma vez e quebrou a extracao (a ancora nao era nem pai
+    nem filha do card), entao aqui juntamos todos os candidatos e preferimos
+    os que apontam para /imovel/.
+    """
+    candidatos = []
+
+    if card.name == 'a' and card.get('href'):
+        candidatos.append(card['href'])
+
+    pai_ancora = card.find_parent('a', href=True)
+    if pai_ancora:
+        candidatos.append(pai_ancora['href'])
+
+    candidatos.extend(a['href'] for a in card.find_all('a', href=True))
+
+    # Sobe a arvore procurando ancoras irmas/proximas.
+    no = card
+    for _ in range(5):
+        no = getattr(no, 'parent', None)
+        if no is None or not getattr(no, 'name', None) or no.name == '[document]':
+            break
+        if no.name == 'a' and no.get('href'):
+            candidatos.append(no['href'])
+        candidatos.extend(a['href'] for a in no.find_all('a', href=True, limit=10))
+
+    # Alguns layouts guardam a URL em data-* em vez de <a href>.
+    for el in [card] + card.find_parents(limit=3):
+        for chave, valor in (getattr(el, 'attrs', {}) or {}).items():
+            if chave.startswith('data-') and isinstance(valor, str) and '/imovel/' in valor:
+                candidatos.append(valor)
+
+    preferidos = [h for h in candidatos if '/imovel/' in h]
+    return (preferidos or candidatos or [''])[0]
 
 def scrape():
     with sync_playwright() as p:
@@ -36,13 +90,18 @@ def scrape():
     print(f'[DEBUG] {len(cards)} cards encontrados no HTML renderizado.')
 
     imoveis = []
-    for card in cards:
-        # Busca ancora: tenta pai primeiro, depois filho
-        anchor = card.find_parent('a', href=True) or card.find('a', href=True)
-        href = anchor.get('href', '') if anchor else ''
-        link = 'https://www.dfimoveis.com.br' + href if href and href.startswith('/') else href
+    for indice, card in enumerate(cards):
+        href = extrair_href(card)
+        link = _urlize(href)
 
         raw = [t.strip() for t in card.get_text('\n').split('\n') if t.strip()]
+
+        if DEBUG_CARDS and indice < 2:
+            print(f'[DIAG] --- card {indice} ---')
+            print(f'[DIAG] tag={card.name} attrs={dict(card.attrs)}')
+            print(f'[DIAG] pais={[p.name for p in card.find_parents(limit=4)]}')
+            print(f'[DIAG] href escolhido={href!r}')
+            print(f'[DIAG] tokens brutos={raw}')
 
         # Mescla tokens separados: ["R$", "3.500"] -> ["R$ 3.500"]
         texts = []
@@ -80,17 +139,15 @@ def scrape():
         suites = next((t for t in texts if 'Suíte' in t or 'Suite' in t), '')
         vagas = next((t for t in texts if 'Vaga' in t), '')
 
-        # ID extraido do link; fallback: hash dos campos principais
+        # ID do anuncio, estavel mesmo se o preco mudar; hash so como fallback.
+        id_legado = hashlib.md5(f'{bloco}|{area}|{quartos}|{aluguel}'.encode()).hexdigest()[:12]
         id_match = re.search(r'-(\d+)(?:[/?]|$)', href)
-        if id_match:
-            imovel_id = id_match.group(1)
-        else:
-            imovel_id = hashlib.md5(f'{bloco}|{area}|{quartos}|{aluguel}'.encode()).hexdigest()[:12]
+        imovel_id = id_match.group(1) if id_match else id_legado
 
         imoveis.append({
             'id': imovel_id, 'bloco': bloco, 'aluguel': aluguel, 'valor_m2': valor_m2,
             'area': area, 'quartos': quartos, 'suites': suites, 'vagas': vagas,
-            'link': link, 'data_descoberta': now_str
+            'link': link, 'data_descoberta': now_str, 'id_legado': id_legado
         })
     return imoveis
 
@@ -114,7 +171,7 @@ def ler_historico():
 def atualizar_csv(historico, novos, sha):
     todos = historico + novos
     output = io.StringIO()
-    writer = csv.DictWriter(output, fieldnames=CSV_COLS)
+    writer = csv.DictWriter(output, fieldnames=CSV_COLS, extrasaction='ignore')
     writer.writeheader()
     writer.writerows(todos)
     csv_b64 = base64.b64encode(output.getvalue().encode('utf-8')).decode('utf-8')
@@ -193,9 +250,17 @@ try:
     print(f'[INFO] {len(imoveis_atuais)} anúncios encontrados no site.')
     ids_existentes, historico, sha = ler_historico()
     print(f'[INFO] Histórico: {len(ids_existentes)} imóveis registrados.')
-    novos = [im for im in imoveis_atuais if im['id'] not in ids_existentes]
+    # Compara tambem pelo hash antigo: as linhas gravadas antes da correcao do
+    # link usam esse formato de ID, e sem isso elas seriam realertadas como novas.
+    novos = [im for im in imoveis_atuais
+             if im['id'] not in ids_existentes and im['id_legado'] not in ids_existentes]
     print(f'[INFO] Novos imóveis detectados: {len(novos)}')
-    if novos:
+    if novos and DRY_RUN:
+        print('[DRY_RUN] Nada foi gravado nem enviado. Novos que seriam notificados:')
+        for im in novos:
+            print(f"[DRY_RUN]   {im['bloco']} | {im['aluguel']} | {im['area']} "
+                  f"| valor_m2={im['valor_m2']!r} | id={im['id']} | link={im['link'] or '(VAZIO)'}")
+    elif novos:
         atualizar_csv(historico, novos, sha)
         enviar_email(novos)
     else:
