@@ -1,4 +1,4 @@
-import base64, csv, io, smtplib, re, os, hashlib
+import base64, csv, io, smtplib, re, os, sys, hashlib
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from email.mime.multipart import MIMEMultipart
@@ -22,6 +22,9 @@ now_str = datetime.now(ZoneInfo('America/Sao_Paulo')).strftime('%Y-%m-%d %H:%M')
 DRY_RUN = os.environ.get('DRY_RUN', '') not in ('', '0', 'false')
 DEBUG_CARDS = os.environ.get('DEBUG_CARDS', '') not in ('', '0', 'false')
 BASE_URL = 'https://www.dfimoveis.com.br'
+# Seletor do card de anuncio. Fica em env para dar para corrigir sem alterar
+# codigo quando o site mexer no layout, o que ja aconteceu duas vezes.
+SELETOR_CARD = os.environ.get('SELETOR_CARD') or '.imovel-card'
 
 
 def _urlize(href):
@@ -71,22 +74,76 @@ def extrair_href(card):
     preferidos = [h for h in candidatos if '/imovel/' in h]
     return (preferidos or candidatos or [''])[0]
 
+def diagnosticar(html):
+    """Explica POR QUE nenhum anuncio foi encontrado.
+
+    Distingue os dois casos possiveis: o site mudou o markup (ha ancoras para
+    /imovel/, mas sob outra classe) ou esta bloqueando o scraper (nao ha
+    ancora nenhuma e a pagina parece challenge/erro).
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    titulo = soup.title.get_text(strip=True) if soup.title else '(sem <title>)'
+    print(f'[DIAG] title={titulo!r} | html={len(html)} bytes')
+
+    marcadores = ['captcha', 'cloudflare', 'just a moment', 'access denied',
+                  'forbidden', 'are you a robot', 'verificando', 'bloqueado']
+    achados = [m for m in marcadores if m in html.lower()]
+    if achados:
+        print(f'[DIAG] POSSIVEL BLOQUEIO: marcadores encontrados={achados}')
+
+    anuncios = soup.select('a[href*="/imovel/"]')
+    print(f'[DIAG] ancoras para /imovel/: {len(anuncios)}')
+
+    if anuncios:
+        print('[DIAG] => A listagem RENDERIZOU; o seletor e que esta desatualizado.')
+        a = anuncios[0]
+        print(f'[DIAG] 1a ancora: tag={a.name} class={a.get("class")}')
+        for nivel, pai in enumerate(a.find_parents(limit=4), start=1):
+            print(f'[DIAG]   pai {nivel}: tag={pai.name} class={pai.get("class")}')
+    else:
+        print('[DIAG] => NENHUMA ancora de anuncio: provavel bloqueio ou pagina de erro.')
+
+    # Containers candidatos, para sugerir o novo seletor.
+    from collections import Counter
+    classes = Counter()
+    for el in soup.find_all(class_=True):
+        for c in el.get('class'):
+            if any(t in c.lower() for t in ('imovel', 'card', 'result', 'anuncio', 'listing', 'property')):
+                classes[c] += 1
+    if classes:
+        print(f'[DIAG] classes candidatas (classe, ocorrencias): {classes.most_common(12)}')
+    else:
+        print('[DIAG] nenhuma classe candidata no HTML.')
+
+
 def scrape():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-dev-shm-usage'])
         page = browser.new_page(
             user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         )
-        try:
-            page.goto(URL_ALVO, timeout=30000, wait_until='domcontentloaded')
-            page.wait_for_selector('.imovel-card', timeout=20000)
-        except Exception as e:
-            print(f'[AVISO] wait_for_selector: {e}')
-        html = page.content()
+        html, cards = '', []
+        # Duas tentativas: evita alarme falso por lentidao ou erro transitorio do site.
+        for tentativa in (1, 2):
+            try:
+                page.goto(URL_ALVO, timeout=30000, wait_until='domcontentloaded')
+                page.wait_for_selector(SELETOR_CARD, timeout=20000)
+            except Exception as e:
+                primeira = (str(e).splitlines() or ['(sem mensagem)'])[0]
+                print(f'[AVISO] tentativa {tentativa}: {type(e).__name__}: {primeira}')
+            html = page.content()
+            cards = BeautifulSoup(html, 'html.parser').select(SELETOR_CARD)
+            if cards:
+                break
+            if tentativa == 1:
+                print('[AVISO] nenhum anuncio na 1a tentativa; recarregando em 5s.')
+                page.wait_for_timeout(5000)
+        if not cards:
+            diagnosticar(html)
         browser.close()
 
     soup = BeautifulSoup(html, 'html.parser')
-    cards = soup.select('.imovel-card')
+    cards = soup.select(SELETOR_CARD)
     print(f'[DEBUG] {len(cards)} cards encontrados no HTML renderizado.')
 
     imoveis = []
@@ -251,9 +308,85 @@ def enviar_email(novos):
         server.send_message(msg)
     print(f'[OK] Email enviado para {NOTIFY_EMAIL} e copia para {CC_EMAIL}.')
 
+def _run_anterior_falhou():
+    """A execucao anterior deste workflow ja havia falhado?
+
+    Serve para alertar uma vez por incidente em vez de a cada execucao. Se a
+    consulta nao for possivel, assume que nao falhou (prefere alertar a calar).
+    """
+    run_id = os.environ.get('GITHUB_RUN_ID')
+    if not run_id:
+        return False
+    try:
+        url = f'https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/monitor.yml/runs'
+        resp = requests.get(url, headers={'Authorization': f'token {GITHUB_PAT}'},
+                            params={'per_page': 5}, timeout=15)
+        if resp.status_code != 200:
+            print(f'[AVISO] nao foi possivel ler runs anteriores: HTTP {resp.status_code}')
+            return False
+        anteriores = [r for r in resp.json().get('workflow_runs', [])
+                      if str(r['id']) != str(run_id) and r['status'] == 'completed']
+        return bool(anteriores) and anteriores[0]['conclusion'] == 'failure'
+    except Exception as e:
+        print(f'[AVISO] checagem de run anterior falhou: {e}')
+        return False
+
+
+def alertar_cegueira():
+    """Avisa que o monitor parou de enxergar anuncios.
+
+    Sem isso, zero anuncio e indistinguivel de 'nenhuma novidade': o run fica
+    verde e a falha passa semanas sem ser notada, como aconteceu entre
+    outubro e novembro de 2026.
+    """
+    if DRY_RUN:
+        print('[DRY_RUN] Alerta de cegueira NAO enviado (modo seguro).')
+        return
+    if _run_anterior_falhou():
+        print('[INFO] Incidente ja alertado na execucao anterior; nao reenviando email.')
+        return
+    assunto = '⚠️ [Monitor SQS-308] Parou de encontrar anúncios — verificar'
+    corpo = (
+        f'<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;padding:20px;">'
+        f'<div style="background:#8a1a1a;color:#fff;padding:22px;border-radius:10px 10px 0 0;">'
+        f'<div style="font-size:20px;font-weight:800;">⚠️ Monitor sem resultados</div>'
+        f'<div style="font-size:13px;margin-top:6px;color:#f0c8c8;">SQS 308 · Asa Sul · Brasília/DF</div></div>'
+        f'<div style="background:#fff;border:1px solid #e0e6ed;padding:22px;border-radius:0 0 10px 10px;">'
+        f'<p style="color:#333;font-size:14px;line-height:1.6;">O monitor rodou em <b>{now_str}</b> e '
+        f'não encontrou <b>nenhum anúncio</b> na busca — nem novo, nem já conhecido.</p>'
+        f'<p style="color:#333;font-size:14px;line-height:1.6;">Isso não significa que não há imóveis: '
+        f'significa que o monitor <b>parou de conseguir ler o site</b>. As causas prováveis são o '
+        f'DFImóveis ter mudado o layout (o seletor <code>{SELETOR_CARD}</code> deixou de casar) ou '
+        f'estar bloqueando o acesso automatizado.</p>'
+        f'<p style="color:#333;font-size:14px;line-height:1.6;">O log da execução traz o diagnóstico '
+        f'<code>[DIAG]</code>, que indica qual dos dois casos é.</p>'
+        f'<p style="font-size:13px;color:#888;">Enquanto isso não for corrigido, '
+        f'<b>você não receberá alertas de imóveis novos</b>.</p></div></div>'
+    )
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = assunto
+    msg['From'] = GMAIL_USER
+    msg['To'] = NOTIFY_EMAIL
+    msg.attach(MIMEText(corpo, 'html', 'utf-8'))
+    with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        server.ehlo()
+        server.starttls()
+        server.login(GMAIL_USER, GMAIL_PASSWORD)
+        server.send_message(msg)
+    print(f'[OK] Alerta de cegueira enviado para {NOTIFY_EMAIL}.')
+
+
 try:
     imoveis_atuais = scrape()
     print(f'[INFO] {len(imoveis_atuais)} anúncios encontrados no site.')
+
+    # Zero anuncio NAO e "sem novidades": a busca sempre teve resultados.
+    # Trata como falha, para o run ficar vermelho e o alerta sair.
+    if not imoveis_atuais:
+        print('[ERRO] Nenhum anúncio encontrado — o monitor não está conseguindo ler o site.')
+        alertar_cegueira()
+        sys.exit(1)
+
     ids_existentes, historico, sha = ler_historico()
     print(f'[INFO] Histórico: {len(ids_existentes)} imóveis registrados.')
     # Compara tambem pelo hash antigo: as linhas gravadas antes da correcao do
