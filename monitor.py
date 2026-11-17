@@ -74,6 +74,48 @@ def extrair_href(card):
     preferidos = [h for h in candidatos if '/imovel/' in h]
     return (preferidos or candidatos or [''])[0]
 
+# Zero anuncio e um cenario legitimo: a SQS 308 e uma quadra so, com filtro de
+# vaga, e pode nao ter nenhum aluguel disponivel. O que NAO e legitimo e nao
+# conseguir ler o site. Para separar os dois casos exigimos evidencia positiva
+# de que a pagina de busca do proprio site renderizou.
+MARCADORES_BLOQUEIO = ['captcha', 'cloudflare', 'just a moment', 'access denied',
+                       'attention required', 'are you a robot', 'verificando seu navegador']
+MARCADORES_SEM_RESULTADO = ['nenhum imóvel', 'nenhum imovel', 'não encontramos',
+                            'nao encontramos', 'nenhum resultado', 'sem resultados',
+                            'não foram encontrados', 'nao foram encontrados',
+                            'nenhum anúncio', 'nenhum anuncio']
+
+
+def classificar_pagina(html, cards):
+    """Classifica o resultado da coleta.
+
+    Retorna um dos quatro estados:
+      'com_anuncios'   - achou anuncios (caminho normal)
+      'vazio'          - a pagina do site carregou e nao ha nenhum imovel (OK)
+      'bloqueio'       - desafio anti-bot ou pagina de erro (FALHA)
+      'indeterminado'  - nao deu para confirmar que a pagina carregou (FALHA)
+    """
+    if cards:
+        return 'com_anuncios'
+
+    baixo = html.lower()
+    if any(m in baixo for m in MARCADORES_BLOQUEIO):
+        return 'bloqueio'
+
+    soup = BeautifulSoup(html, 'html.parser')
+    # Evidencia positiva: a navegacao do proprio DFImoveis esta na pagina.
+    # Um desafio do Cloudflare nao traz nada disso.
+    nav = soup.select('a[href*="/aluguel"], a[href*="/venda"], a[href*="/lancamento"]')
+    pagina_do_site = len(nav) >= 3
+
+    if any(m in baixo for m in MARCADORES_SEM_RESULTADO) and pagina_do_site:
+        return 'vazio'
+    if pagina_do_site:
+        # Carregou a busca, sem anuncios e sem mensagem explicita: ainda e zero valido.
+        return 'vazio'
+    return 'indeterminado'
+
+
 def diagnosticar(html):
     """Explica POR QUE nenhum anuncio foi encontrado.
 
@@ -135,10 +177,17 @@ def scrape():
             cards = BeautifulSoup(html, 'html.parser').select(SELETOR_CARD)
             if cards:
                 break
+            # Retenta so se a pagina nao carregou; se carregou e esta vazia, zero e real.
+            estado_parcial = classificar_pagina(html, cards)
+            if estado_parcial == 'vazio':
+                break
             if tentativa == 1:
-                print('[AVISO] nenhum anuncio na 1a tentativa; recarregando em 5s.')
+                print(f'[AVISO] 1a tentativa sem anuncios (estado={estado_parcial}); recarregando em 5s.')
                 page.wait_for_timeout(5000)
-        if not cards:
+        estado = classificar_pagina(html, cards)
+        if estado != 'com_anuncios':
+            print(f'[INFO] Estado da coleta: {estado}')
+        if estado in ('bloqueio', 'indeterminado'):
             diagnosticar(html)
         browser.close()
 
@@ -212,7 +261,7 @@ def scrape():
 
         if DEBUG_CARDS and indice < 2:
             print(f'[DIAG] registro montado={imoveis[-1]}')
-    return imoveis
+    return imoveis, estado
 
 def ler_historico():
     url = f'https://api.github.com/repos/{GITHUB_REPO}/contents/{CSV_FILE}'
@@ -332,36 +381,39 @@ def _run_anterior_falhou():
         return False
 
 
-def alertar_cegueira():
-    """Avisa que o monitor parou de enxergar anuncios.
+def alertar_falha_de_leitura(estado):
+    """Avisa que o monitor nao conseguiu LER o site.
 
-    Sem isso, zero anuncio e indistinguivel de 'nenhuma novidade': o run fica
-    verde e a falha passa semanas sem ser notada, como aconteceu entre
-    outubro e novembro de 2026.
+    So e chamado quando ha evidencia de bloqueio ou quando nao deu para
+    confirmar que a pagina carregou. Busca vazia com a pagina do site
+    renderizada NAO passa por aqui: zero imovel na SQS 308 e cenario normal.
     """
     if DRY_RUN:
-        print('[DRY_RUN] Alerta de cegueira NAO enviado (modo seguro).')
+        print('[DRY_RUN] Alerta de falha de leitura NAO enviado (modo seguro).')
         return
     if _run_anterior_falhou():
         print('[INFO] Incidente ja alertado na execucao anterior; nao reenviando email.')
         return
-    assunto = '⚠️ [Monitor SQS-308] Parou de encontrar anúncios — verificar'
+    if estado == 'bloqueio':
+        causa = ('O site respondeu com uma <b>página de desafio anti-bot</b> '
+                 '(Cloudflare) em vez da listagem.')
+    else:
+        causa = ('Não foi possível confirmar que a página de busca carregou — '
+                 'pode ser erro do site, timeout ou mudança de layout.')
+    assunto = '⚠️ [Monitor SQS-308] Não consegui ler o site — verificar'
     corpo = (
         f'<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;padding:20px;">'
         f'<div style="background:#8a1a1a;color:#fff;padding:22px;border-radius:10px 10px 0 0;">'
-        f'<div style="font-size:20px;font-weight:800;">⚠️ Monitor sem resultados</div>'
+        f'<div style="font-size:20px;font-weight:800;">⚠️ Falha de leitura do site</div>'
         f'<div style="font-size:13px;margin-top:6px;color:#f0c8c8;">SQS 308 · Asa Sul · Brasília/DF</div></div>'
         f'<div style="background:#fff;border:1px solid #e0e6ed;padding:22px;border-radius:0 0 10px 10px;">'
-        f'<p style="color:#333;font-size:14px;line-height:1.6;">O monitor rodou em <b>{now_str}</b> e '
-        f'não encontrou <b>nenhum anúncio</b> na busca — nem novo, nem já conhecido.</p>'
-        f'<p style="color:#333;font-size:14px;line-height:1.6;">Isso não significa que não há imóveis: '
-        f'significa que o monitor <b>parou de conseguir ler o site</b>. As causas prováveis são o '
-        f'DFImóveis ter mudado o layout (o seletor <code>{SELETOR_CARD}</code> deixou de casar) ou '
-        f'estar bloqueando o acesso automatizado.</p>'
-        f'<p style="color:#333;font-size:14px;line-height:1.6;">O log da execução traz o diagnóstico '
-        f'<code>[DIAG]</code>, que indica qual dos dois casos é.</p>'
-        f'<p style="font-size:13px;color:#888;">Enquanto isso não for corrigido, '
-        f'<b>você não receberá alertas de imóveis novos</b>.</p></div></div>'
+        f'<p style="color:#333;font-size:14px;line-height:1.6;">Na execução de <b>{now_str}</b> o monitor '
+        f'<b>não conseguiu ler a listagem</b>. {causa}</p>'
+        f'<p style="color:#333;font-size:14px;line-height:1.6;">Atenção: isto <b>não</b> quer dizer que a '
+        f'SQS 308 está sem imóveis. Quer dizer que o monitor está cego — se houver imóvel novo agora, '
+        f'ele não será detectado.</p>'
+        f'<p style="color:#333;font-size:14px;line-height:1.6;">O log da execução traz as linhas '
+        f'<code>[DIAG]</code> com a causa (estado detectado: <code>{estado}</code>).</p></div></div>'
     )
     msg = MIMEMultipart('alternative')
     msg['Subject'] = assunto
@@ -373,18 +425,18 @@ def alertar_cegueira():
         server.starttls()
         server.login(GMAIL_USER, GMAIL_PASSWORD)
         server.send_message(msg)
-    print(f'[OK] Alerta de cegueira enviado para {NOTIFY_EMAIL}.')
+    print(f'[OK] Alerta de falha de leitura enviado para {NOTIFY_EMAIL}.')
 
 
 try:
-    imoveis_atuais = scrape()
+    imoveis_atuais, estado_coleta = scrape()
     print(f'[INFO] {len(imoveis_atuais)} anúncios encontrados no site.')
 
-    # Zero anuncio NAO e "sem novidades": a busca sempre teve resultados.
-    # Trata como falha, para o run ficar vermelho e o alerta sair.
-    if not imoveis_atuais:
-        print('[ERRO] Nenhum anúncio encontrado — o monitor não está conseguindo ler o site.')
-        alertar_cegueira()
+    # Falha e nao conseguir LER o site. Busca vazia com a pagina carregada e
+    # cenario normal: a SQS 308 pode simplesmente nao ter aluguel com vaga.
+    if estado_coleta in ('bloqueio', 'indeterminado'):
+        print(f'[ERRO] Não foi possível ler a listagem (estado={estado_coleta}).')
+        alertar_falha_de_leitura(estado_coleta)
         sys.exit(1)
 
     ids_existentes, historico, sha = ler_historico()
@@ -403,7 +455,13 @@ try:
         atualizar_csv(historico, novos, sha)
         enviar_email(novos)
     else:
-        print(f'[MONITOR SQS-308] {now_str} — Sem novidades. Histórico: {len(ids_existentes)} imóveis registrados.')
+        if estado_coleta == 'vazio':
+            print(f'[MONITOR SQS-308] {now_str} — A busca não retornou nenhum imóvel '
+                  f'(a página do site carregou; a SQS 308 está sem aluguel com vaga). '
+                  f'Histórico: {len(ids_existentes)} imóveis registrados.')
+        else:
+            print(f'[MONITOR SQS-308] {now_str} — Sem novidades. '
+                  f'Histórico: {len(ids_existentes)} imóveis registrados.')
 except Exception as e:
     print(f'[ERRO CRÍTICO] {datetime.now().strftime("%Y-%m-%d %H:%M")} — {e}')
     raise
