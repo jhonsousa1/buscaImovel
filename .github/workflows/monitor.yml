@@ -2,8 +2,10 @@ name: Monitor SQS-308
 
 on:
   schedule:
-    - cron: '0 * * * *'  # toda hora
+    - cron: '0 * * * *'  # toda hora (o GitHub estrangula: ver repository_dispatch)
   workflow_dispatch:      # disparo manual para teste
+  repository_dispatch:
+    types: [checar-imoveis]  # gatilho externo, para frequencia confiavel
   push:
     branches: ['fix/**']  # valida correcoes em modo seguro (DRY_RUN)
 
@@ -12,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: read       # ler a conclusao do run anterior (alerta 1x por incidente)
 
     steps:
       - name: Checkout
@@ -30,4 +33,6 @@ jobs:
           # Fora da main: nao envia email, nao grava CSV e imprime o diagnostico.
           DRY_RUN: ${{ github.ref_name != 'main' && '1' || '' }}
           DEBUG_CARDS: ${{ github.ref_name != 'main' && '1' || '' }}
+          # Corrigivel sem mexer no codigo quando o site trocar o layout.
+          SELETOR_CARD: ${{ vars.SELETOR_CARD }}
         run: python monitor.py
